@@ -1,7 +1,7 @@
 "use client"
 import { Workflow } from '@prisma/client'
-import { Background, BackgroundVariant, Controls, ReactFlow, useNodesState } from '@xyflow/react'
-import React from 'react'
+import { Background, BackgroundVariant, Controls, ReactFlow, useNodesState, useReactFlow } from '@xyflow/react'
+import React, { useEffect } from 'react'
 
 import '@xyflow/react/dist/style.css'
 import { createFlowNode } from '@/lib/workflow/createFlowNode'
@@ -22,12 +22,23 @@ const fitViewOptions = {
 
 
 export default function FlowEditor({workflow}:{workflow:Workflow}) {
-  const [nodes, setNodes,onNodeChange] = useNodesState([
-    createFlowNode(TaskType.LAUNCH_BROWSER,{x:0,y:0})
-  ]);
+  const [nodes, setNodes,onNodeChange] = useNodesState([ ]);
   const [edges, setEdges,onEdgesChange] = useNodesState([]);
+  const {setViewport} = useReactFlow();
 
+  useEffect(()=>{
+    try{
+      const flow = JSON.parse(workflow.definition);
+      if(!flow) return;
+      setNodes(flow.nodes || []);
+      setEdges(flow.edges || []);
 
+      // Set the viewport to be insert into the Database
+      if(!flow.viewport) return;
+      const {x=0,y=0,zoom=1} = flow.viewport;
+      setViewport({x,y,zoom});
+    }catch(e){}
+  },[workflow.definition,setNodes,setEdges,setViewport])
 
   return (
     <main className="h-full w-full">

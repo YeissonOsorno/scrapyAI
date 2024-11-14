@@ -7,7 +7,7 @@ import { TaskType } from "@/types/Task";
  */
 export function createFlowNode(
   nodeType:TaskType,
-  position:{x:number,y:number},
+  position?:{x:number,y:number},
 ):AppNode{
   return {
     id:crypto.randomUUID(),
