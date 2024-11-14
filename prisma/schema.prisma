@@ -23,6 +23,6 @@ model Workflow {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // User cannot have two workflows with the same name
+  // User cannot have two workflows with the same name s
   @@unique([name, userId])
 }
