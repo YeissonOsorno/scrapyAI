@@ -6,7 +6,7 @@ import { WorkflowStatus } from "@/types/workflow";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
- export async function createWorkflows(form:createWorkflowSchemaType) {
+ export async function CreateWorkflows(form:createWorkflowSchemaType) {
   const {success, data} = createWorkflowSchema.safeParse(form);
   if(!success) {
     throw new Error("Invalid form");

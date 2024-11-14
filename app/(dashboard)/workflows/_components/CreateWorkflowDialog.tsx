@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { createWorkflows } from '@/actions/workflows/createWorkflows';
+import { CreateWorkflows } from '@/actions/workflows/createWorkflows';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -23,7 +23,7 @@ export default function CreateWorkflowDialog({triggerText}:{triggerText?:string}
   });
 
   const {mutate,isPending} = useMutation({
-    mutationFn: createWorkflows,
+    mutationFn: CreateWorkflows,
     onSuccess: () => {
       toast.success("Workflow created",{id:"create-workflow"});
     },
