@@ -10,7 +10,7 @@ function page() {
     <div className="flex-1 flex flex-col h-full p-8">
       <div className="flex justify-between">
         <div className="flex flex-col">
-          <div className="text-3xl font-bold">Workflows</div>
+          <h1 className="text-3xl font-bold">Workflows</h1>
           <p className="text-muted-foreground">Manage your workflows</p>
         </div>
         <CreateWorkflowDialog/>
@@ -18,7 +18,7 @@ function page() {
 
       <div className="h-full py-6">
         <Suspense fallback={<UserWorkFlowsSkeleton />}>
-        <UserWorkFlows />
+          <UserWorkFlows />
         </Suspense>
       </div>
     </div>
@@ -68,7 +68,7 @@ async function UserWorkFlows() {
     )
   }
   return (
-    <div className=""></div>
+    <pre>{JSON.stringify(workflows,null,2)}</pre>
   )
 }
 
