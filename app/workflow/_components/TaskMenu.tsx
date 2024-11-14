@@ -29,8 +29,19 @@ export default function TaskMenu() {
 
 function TaskMenuBtn({taskType}:{taskType:TaskType}) {
   const task = TaskRegistry[taskType];
+
+  // Allow drag and drop
+  const onDragStart = (event:React.DragEvent,type:TaskType)=>{
+    event.dataTransfer.setData("application/reactflow", type);
+    event.dataTransfer.effectAllowed = "move";
+  }
   return (
-    <Button variant={"secondary"} className='flex justify-between items-center gap-2 w-full border'>
+    <Button 
+    variant={"secondary"} 
+    className='flex justify-between items-center gap-2 w-full border' 
+    draggable={true}
+    onDragStart={(event)=> onDragStart(event,taskType)}
+    >
       <div className='flex gap-2'>
         <task.icon size={20}/>
         {task.label}
