@@ -4,6 +4,7 @@ import { TaskParam } from '@/types/Task'
 import { Handle, Position } from '@xyflow/react'
 import React from 'react'
 import NodeParamField from './NodeParamField'
+import { ColorForHandle } from './common'
 
 export default function NodeInputs({children}:{children:React.ReactNode}) {
   return (
@@ -20,7 +21,8 @@ export function NodeInput({input,nodeId}:{input:TaskParam,nodeId:string}) {
       {!input.hideHandle &&(
         <Handle id={input.name} type='target' position={Position.Left}
         className={cn(
-          "!bg-muted-foreground !border-2 !border-background !-left-2 !w-4 !h-4"
+          "!bg-muted-foreground !border-2 !border-background !-left-2 !w-4 !h-4",
+          ColorForHandle[input.type]
         )}
         />
       )}
